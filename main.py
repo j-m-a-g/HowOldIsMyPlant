@@ -16,8 +16,8 @@ mainWindow.geometry("300x300")
 predictions_list = []
 
 # Use inference to predict on a hosted image
-# image_url = "https://cdn.vectorstock.com/i/1000v/81/68/parts-of-a-plant-vector-1858168.jpg"
-image_url = "https://reefertilizer.com/wp-content/uploads/2018/12/IMG_20181219_185434-scaled-e1596134064368.jpg"
+image_url = "https://cdn.vectorstock.com/i/1000v/81/68/parts-of-a-plant-vector-1858168.jpg"
+#image_url = "https://reefertilizer.com/wp-content/uploads/2018/12/IMG_20181219_185434-scaled-e1596134064368.jpg"
 prediction_result = model.predict(image_url, hosted=True, confidence=1, overlap=30).json()
 
 # Create and save a prediction image to visually see resulting predictions
@@ -42,16 +42,16 @@ for item in value_list:
         flat_list.append(item)
 
 # Print flattened list
-print("Flattened Values:", flat_list)
+print("\nFlattened Values:", flat_list)
 
 # Function to create the data structure from the prediction results
-def create_data_structure(prediction_result):
+def create_data_structure(prediction_result_param):
     data = []
     detections = []
 
     # Extract the detections from the prediction result
-    if isinstance(prediction_result, dict) and 'predictions' in prediction_result:
-        for prediction in prediction_result['predictions']:
+    if isinstance(prediction_result_param, dict) and 'predictions' in prediction_result_param:
+        for prediction in prediction_result_param['predictions']:
             detection = {
                 'x': prediction.get('x'),
                 'y': prediction.get('y'),
@@ -65,9 +65,10 @@ def create_data_structure(prediction_result):
                 'prediction_type': prediction.get('prediction_type')
             }
             detections.append(detection)
+            print()
             print(detections)
+            
     return detections
-
 
 
 # Create data from the prediction result
@@ -82,13 +83,13 @@ for item in data:
         keys.extend(item.keys())
         values.extend(item.values())
 
-print("Keys:", keys)
-print("Values:", values)
+print("\nKeys:", keys)
+print("\nValues:", values)
 
 # Find the class key and print the plant's age
 if 'class' in keys:
     class_index = keys.index('class')
-    print("Your plant is", values[class_index], "old")
+    print("\nYour plant is", values[class_index], "old")
 
 # if "class"in keys: 
 #     for i in detections: 
@@ -97,5 +98,5 @@ if 'class' in keys:
 #         boxarea = values[width]*values[height]
 #         print(boxarea) 
 
-# Start the Tkinter main loop
-mainWindow.mainloop()
+# Start the tkinter main loop
+#mainWindow.mainloop()
