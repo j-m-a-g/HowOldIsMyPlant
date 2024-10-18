@@ -28,7 +28,7 @@ def Main():
         isHostedBoolean = True
     else:
         print("\n😵  Oops! Try Again :(\n")
-        time.sleep(3)
+        time.sleep(2)
         Main()
 
 
@@ -44,9 +44,13 @@ def Main():
     def Save_Predictions_As_Output_Image():
         print("\nWorking...")
         # Create and save a prediction image to visually see resulting predictions
-        model.predict(imagePathInput.strip("\'\""), hosted = isHostedBoolean, confidence = 1, overlap = 30).save(visualizationImageFileName, 7.5)
-        print("Output File: \"/" + visualizationImageFileName + "\"")
-        time.sleep(3)
+        try:
+            model.predict(imagePathInput.strip("\'\""), hosted = isHostedBoolean, confidence = 1, overlap = 30).save(visualizationImageFileName, 8)
+            print("Output File: \"/" + visualizationImageFileName + "\"")
+            time.sleep(2)
+        except:
+            print("\nHTTP Error 403: Forbidden")
+            time.sleep(2)
 
 
     savePredictionsResultImage = input("\nSave the model's predictions as a separate image? (y/yes) [n/no]: ")
@@ -116,7 +120,7 @@ def Main():
             values.extend(item.values())
 
 
-    print("\nValue Keys:", keys)
+    print("\nValue Key:", keys)
     print("\nValues:", values)
 
     # Find the class key and print the plant's age
