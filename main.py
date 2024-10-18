@@ -1,6 +1,7 @@
 from roboflow import Roboflow
-import time
+import cv2
 import os
+import time
 
 def Main():
     os.system("cls")
@@ -44,7 +45,7 @@ def Main():
         print("Output File: \"/HowOldIsMyPlant_predictions.jpg\"")
         time.sleep(3)
 
-    savePredictionsResultImage = input("\nSave the model's predictions as a separate image? [y/yes] [n/no]: ")
+    savePredictionsResultImage = input("\nSave the model's predictions as a separate image? (y/yes) [n/no]: ")
     if savePredictionsResultImage in ["y", "Y", "yes", "Yes", "YES"]:
         Save_Predictions_As_Output_Image()
     
@@ -111,13 +112,18 @@ def Main():
             values.extend(item.values())
 
 
-    print("\nValue Key:", keys)
+    print("\nValue Keys:", keys)
     print("\nValues:", values)
 
     # Find the class key and print the plant's age
     if 'class' in keys:
         class_index = keys.index('class')
-        print("\n=== Your plant is about", values[class_index], "old ===\n")
+        if values[class_index] == "soil":
+            print("\n=== That is just soil! ===\n")
+        elif values[class_index] == "harvest":
+            print("\n=== Your plant is ready to be harvested. ===\n")
+        else:
+            print("\n=== Your plant is about", values[class_index], "old ===\n")
 
 
     # if "class"in keys: 
