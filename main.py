@@ -45,11 +45,10 @@ def Main():
         time.sleep(3)
 
     savePredictionsResultImage = input("\nSave the model's predictions as a separate image? [y/yes] [n/no]: ")
-    if savePredictionsResultImage == "y":
+    if savePredictionsResultImage in ["y", "Y", "yes", "Yes", "YES"]:
         Save_Predictions_As_Output_Image()
-    elif savePredictionsResultImage == "yes":
-        Save_Predictions_As_Output_Image()
-
+    
+    
     # Extract values from the prediction result
     key_list = []
     value_list = []
