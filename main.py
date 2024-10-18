@@ -29,20 +29,22 @@ def Main():
 
 
     # Present user with feedback that the model is currently in the process of making a prediction
-    print("\nWorking...\n")
+    print("\nWorking...")
     time.sleep(1)
     
     # Use inference to predict on a hosted image
-    prediction_result = model.predict(imagePathInput.strip("\"\'"), hosted = isHostedBoolean, confidence = 1, overlap = 30).json()
+    prediction_result = model.predict(imagePathInput.strip("\'\""), hosted = isHostedBoolean, confidence = 1, overlap = 30).json()
 
 
     # Option of whether to save an individual image that visually displays the predictions derived from the model
     def Save_Predictions_As_Output_Image():
         print("\nWorking...")
         # Create and save a prediction image to visually see resulting predictions
-        model.predict(imagePathInput.strip("\"\'"), hosted = isHostedBoolean, confidence = 1, overlap = 30).save("predictions.jpg")
+        model.predict(imagePathInput.strip("\'\""), hosted = isHostedBoolean, confidence = 1, overlap = 30).save("HowOldIsMyPlant_predictions.jpg", 10)
+        print("Output File: \"/HowOldIsMyPlant_predictions.jpg\"")
+        time.sleep(2)
 
-    savePredictionsResultImage = input("Save the model's predictions as a separate image? [y/yes] [n/no]: ")
+    savePredictionsResultImage = input("\nSave the model's predictions as a separate image? [y/yes] [n/no]: ")
     if savePredictionsResultImage == "y":
         Save_Predictions_As_Output_Image()
     elif savePredictionsResultImage == "yes":
@@ -116,7 +118,7 @@ def Main():
     # Find the class key and print the plant's age
     if 'class' in keys:
         class_index = keys.index('class')
-        print("\nYour plant is", values[class_index], "old")
+        print("\n=== Your plant is about", values[class_index], "old ===\n")
 
 
     # if "class"in keys: 
