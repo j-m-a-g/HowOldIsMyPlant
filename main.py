@@ -1,5 +1,3 @@
-# https://docs.roboflow.com/deploy/hosted-api/custom-models/object-detection
-
 from tkinter import *
 from tkinter import ttk
 from roboflow import Roboflow
@@ -16,8 +14,13 @@ mainWindow.geometry("300x300")
 predictions_list = []
 
 # Use inference to predict on a hosted image
+<<<<<<< HEAD
 image_url = "https://cdn.vectorstock.com/i/1000v/81/68/parts-of-a-plant-vector-1858168.jpg"
 #image_url = "https://reefertilizer.com/wp-content/uploads/2018/12/IMG_20181219_185434-scaled-e1596134064368.jpg"
+=======
+# image_url = "https://cdn.vectorstock.com/i/1000v/81/68/parts-of-a-plant-vector-1858168.jpg"
+image_url = "https://www.bhg.com/thmb/SfvVALaQxFyi4vYdbhBR11S41S8=/1280x0/filters:no_upscale():strip_icc()/indoor-potted-houseplants-703b321a-81cf8e1f9aee48a28e1be3bbc45e4386.jpg"
+>>>>>>> cf39b950e8059d9218cc0ff483b4fe70bd7bf1b0
 prediction_result = model.predict(image_url, hosted=True, confidence=1, overlap=30).json()
 
 # Create and save a prediction image to visually see resulting predictions
@@ -42,7 +45,11 @@ for item in value_list:
         flat_list.append(item)
 
 # Print flattened list
+<<<<<<< HEAD
 print("\nFlattened Values:", flat_list)
+=======
+#print("Flattened Values:", flat_list)
+>>>>>>> cf39b950e8059d9218cc0ff483b4fe70bd7bf1b0
 
 # Function to create the data structure from the prediction results
 def create_data_structure(prediction_result_param):
@@ -78,18 +85,93 @@ data = create_data_structure(prediction_result)
 keys = []
 values = []
 
+
 for item in data:
     if isinstance(item, dict):
         keys.extend(item.keys())
         values.extend(item.values())
 
+<<<<<<< HEAD
 print("\nKeys:", keys)
 print("\nValues:", values)
+=======
+#print("Keys:", keys)
+#print("Values:", values)
+>>>>>>> cf39b950e8059d9218cc0ff483b4fe70bd7bf1b0
 
 # Find the class key and print the plant's age
 if 'class' in keys:
     class_index = keys.index('class')
+<<<<<<< HEAD
     print("\nYour plant is", values[class_index], "old")
+=======
+    #print("Your plant is", values[class_index], "old")
+
+
+for k in keys: 
+    if k == keys.index('prediction_type'): 
+        index_class = keys.index(k) + 1  
+        new_list = keys[index_class:]
+        print(new_list)
+        
+widths = []
+
+# Loop through the list of keys
+for w, key in enumerate(keys):
+    if key == 'width':
+        # Append the corresponding value to widths list
+        widths.append(values[w])
+
+# Print the extracted widths
+print("Widths:", widths)
+
+
+heights = []
+
+# Loop through the list of keys
+for h, key in enumerate(keys):
+    if key == 'height':
+        # Append the corresponding value to widths list
+        heights.append(values[h])
+
+# Print the extracted widths
+print("Heights:", heights)
+
+max_width = max(widths)
+
+for i in range(len(keys)): 
+    if keys[i] == "width" and values[i] == max_width: 
+        class_index_width = i + (keys[i:].index("class") if "class" in keys[i:] else None)
+        class_value_width = values[class_index]
+        print(class_value_width)
+
+max_height = max(heights)
+for e in range(len(keys)): 
+    if keys[e] == "width" and values[e] == max_height: 
+        class_index_height= e + (keys[e:].index("class") if "class" in keys[e:] else None)
+        class_value_height = values[class_index]
+        print(class_value_height)
+    
+
+
+                
+        
+    #for n in new_list:
+#     # Extract and append width and height values if they exist
+#     if 'width' in n:
+#         widths = [] 
+#         widths.append(n['width'])
+#         print("Widths:", widths)
+#     if 'height' in n:
+#         heights= [] 
+#         heights.append(n['height'])
+#         print("Heights:", heights)
+
+# Print the collected width and height values
+
+
+                
+>>>>>>> cf39b950e8059d9218cc0ff483b4fe70bd7bf1b0
 
 # if "class"in keys: 
 #     for i in detections: 
@@ -97,6 +179,9 @@ if 'class' in keys:
 #         height = keys.index("height")
 #         boxarea = values[width]*values[height]
 #         print(boxarea) 
+            
+                
+        
 
 # Start the tkinter main loop
 #mainWindow.mainloop()
