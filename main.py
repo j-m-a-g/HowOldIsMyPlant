@@ -13,6 +13,9 @@ def Main():
 
     os.system("cls")
     
+    agreeingResponsesDictionary = ["y", "Y", "yes", "Yes", "YES"]
+    visualizationImageFileName = "HowOldIsMyPlant_box_annotation_visual.png"
+    
     # Display content to enter either a local image path or an online image URL for the model to analyze
     print("=== 🪴  How Old Is My Plant? ===")
 
@@ -41,12 +44,13 @@ def Main():
     def Save_Predictions_As_Output_Image():
         print("\nWorking...")
         # Create and save a prediction image to visually see resulting predictions
-        model.predict(imagePathInput.strip("\'\""), hosted = isHostedBoolean, confidence = 1, overlap = 30).save("HowOldIsMyPlant_predictions.jpg", 10)
-        print("Output File: \"/HowOldIsMyPlant_predictions.jpg\"")
+        model.predict(imagePathInput.strip("\'\""), hosted = isHostedBoolean, confidence = 1, overlap = 30).save(visualizationImageFileName, 7.5)
+        print("Output File: \"/" + visualizationImageFileName + "\"")
         time.sleep(3)
 
+
     savePredictionsResultImage = input("\nSave the model's predictions as a separate image? (y/yes) [n/no]: ")
-    if savePredictionsResultImage in ["y", "Y", "yes", "Yes", "YES"]:
+    if savePredictionsResultImage in agreeingResponsesDictionary:
         Save_Predictions_As_Output_Image()
     
     
@@ -119,13 +123,20 @@ def Main():
     if 'class' in keys:
         class_index = keys.index('class')
         if values[class_index] == "soil":
-            print("\n=== That is just soil! ===\n")
+            print("\n\n=== That is just soil! ===\n")
         elif values[class_index] == "harvest":
-            print("\n=== Your plant is ready to be harvested. ===\n")
+            print("\n\n=== Your plant is ready to be harvested. ===\n")
         else:
-            print("\n=== Your plant is about", values[class_index], "old ===\n")
+            print("\n\n=== Your plant is about", values[class_index], "old ===\n")
 
 
+    # Enables the user to restart the program to run the model on another image of their choice
+    runOnAnotherImage = input("\nRun model on another image? (y/yes) [n/no]: ")
+    if runOnAnotherImage in agreeingResponsesDictionary:
+        Main()
+    else:
+        print()
+    
     # if "class"in keys: 
     #     for i in detections: 
     #         width = keys.index("width")
