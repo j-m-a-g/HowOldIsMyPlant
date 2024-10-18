@@ -6,13 +6,13 @@ def Main():
     os.system("cls")
     
     # Initialize Roboflow project
-    rf = Roboflow(api_key="xiu3cjOBKOMlP2zSBvTr")
-    project = rf.workspace("fx-coding-club-1armu").project("howoldismyplant")
+    roboflowObject = Roboflow(api_key="xiu3cjOBKOMlP2zSBvTr")
+    project = roboflowObject.workspace("fx-coding-club-1armu").project("howoldismyplant")
     model = project.version(1).model
 
     os.system("cls")
     
-    # Display content to enter either a local image path or an online image URL
+    # Display content to enter either a local image path or an online image URL for the model to analyze
     print("=== 🪴  How Old Is My Plant? ===")
 
     isHostedOption = input("\nLocal [l/local] or Hosted [h/hosted]?: ")
@@ -42,7 +42,7 @@ def Main():
         # Create and save a prediction image to visually see resulting predictions
         model.predict(imagePathInput.strip("\'\""), hosted = isHostedBoolean, confidence = 1, overlap = 30).save("HowOldIsMyPlant_predictions.jpg", 10)
         print("Output File: \"/HowOldIsMyPlant_predictions.jpg\"")
-        time.sleep(2)
+        time.sleep(3)
 
     savePredictionsResultImage = input("\nSave the model's predictions as a separate image? [y/yes] [n/no]: ")
     if savePredictionsResultImage == "y":
