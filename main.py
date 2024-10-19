@@ -1,5 +1,4 @@
 from roboflow import Roboflow
-import cv2
 import os
 import time
 
@@ -18,7 +17,7 @@ def Main():
     
     # Display content to enter either a local image path or an online image URL for the model to analyze
     print("=== 🪴  How Old Is My Plant? ===")
-
+    
     isHostedOption = input("\nLocal [l/local] or Hosted [h/hosted]?: ")
     if isHostedOption in ["l", "L", "local", "Local", "LOCAL"]:
         imagePathInput = input("\nLocal Image Path: ")
@@ -84,7 +83,6 @@ def Main():
     # Create the data structure from the prediction results
     def Create_Data_Structure(prediction_result_param):
         detections = []
-
         # Extract the detections from the prediction result
         if isinstance(prediction_result_param, dict) and 'predictions' in prediction_result_param:
             for prediction in prediction_result_param['predictions']:
@@ -149,5 +147,5 @@ def Main():
     #         print(boxarea)
 
 
-# Call the Main function
+# Call Main
 Main()
