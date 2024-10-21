@@ -2,14 +2,14 @@ from roboflow import Roboflow
 import os
 import time
 
-def main():
-    os.system("cls")
-    
-    # Initialize Roboflow project
-    roboflow_object = Roboflow(api_key="xiu3cjOBKOMlP2zSBvTr")
-    project = roboflow_object.workspace("fx-coding-club-1armu").project("howoldismyplant")
-    model = project.version(1).model
+os.system("cls")
 
+# Initialize Roboflow project
+roboflow_object = Roboflow(api_key="xiu3cjOBKOMlP2zSBvTr")
+project = roboflow_object.workspace("fx-coding-club-1armu").project("howoldismyplant")
+model = project.version(1).model
+
+def main():
     os.system("cls")
     
     agreeing_responses_dictionary = ["y", "Y", "yes", "Yes", "YES"]
