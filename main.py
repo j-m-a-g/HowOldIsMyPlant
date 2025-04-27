@@ -12,6 +12,7 @@ model = project.version(1).model
 
 
 def main():
+  global image_path_input, is_hosted_boolean
   os.system("cls")
 
   agreeing_responses_dictionary = ["y", "Y", "yes", "Yes", "YES"]
